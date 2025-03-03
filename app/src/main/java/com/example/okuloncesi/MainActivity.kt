@@ -22,7 +22,7 @@ import com.example.okuloncesi.screens.CategoryScreen
 import com.example.okuloncesi.screens.CategoryDetailScreen
 import com.example.okuloncesi.screens.LearningScreen
 import com.example.okuloncesi.screens.TestScreen
-//import com.example.okuloncesi.navigation.AppNavigation
+import com.example.okuloncesi.navigation.AppNavigation
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
