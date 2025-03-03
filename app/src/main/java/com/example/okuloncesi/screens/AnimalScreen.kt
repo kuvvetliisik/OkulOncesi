@@ -41,7 +41,7 @@ fun AnimalScreen() {
     val animals = listOf(
         Triple("Köpek", R.raw.dog, "Bu hayvanın ismi köpektir."),
         Triple("Kedi", R.raw.cat, "Kediler sevimli ve oyuncudur."),
-        //Triple("Kuş", R.raw.bird, "Kuşlar uçabilen canlılardır.")
+        Triple("Kuş", R.raw.bird, "Kuşlar uçabilen canlılardır.")
     )
 
     var currentIndex by remember { mutableStateOf(0) }
