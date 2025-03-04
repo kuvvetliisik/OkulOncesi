@@ -14,7 +14,7 @@ fun AppNavigation() {
     NavHost(navController = navController, startDestination = "categoryScreen") {
          composable("categoryScreen") { CategoryScreen(navController) }
         composable("animalScreen") { AnimalScreen() }
-        composable("numberScreen") { NumberScreen(navController) }
+        composable("numberScreen") { NumberScreen() }
         composable("colorScreen") { ColorScreen(navController) }
         composable("shapeScreen") { ShapeScreen(navController) }
         composable("fruitScreen") { FruitScreen(navController) }
