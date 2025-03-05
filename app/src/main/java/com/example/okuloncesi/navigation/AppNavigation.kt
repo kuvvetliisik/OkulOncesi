@@ -15,7 +15,7 @@ fun AppNavigation() {
          composable("categoryScreen") { CategoryScreen(navController) }
         composable("animalScreen") { AnimalScreen() }
         composable("numberScreen") { NumberScreen() }
-        composable("colorScreen") { ColorScreen(navController) }
+        composable("colorScreen") { ColorScreen() }
         composable("shapeScreen") { ShapeScreen(navController) }
         composable("fruitScreen") { FruitScreen(navController) }
         composable("vehicleScreen") { VehicleScreen(navController) }

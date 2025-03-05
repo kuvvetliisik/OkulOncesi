@@ -56,6 +56,8 @@ dependencies {
     implementation(libs.exoplayer)
     implementation(libs.androidx.tts)
     implementation(libs.coil.compose)
+    implementation(libs.accompanist.pager)
+
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
