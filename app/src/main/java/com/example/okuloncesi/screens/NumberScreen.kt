@@ -27,14 +27,14 @@ import kotlinx.coroutines.launch
 @Composable
 fun NumberScreen() {
     val context = LocalContext.current
-    val haptic = LocalHapticFeedback.current // Titreşim için
+    val haptic = LocalHapticFeedback.current
 
     var tts: TextToSpeech? by remember { mutableStateOf(null) }
 
     LaunchedEffect(Unit) {
         tts = TextToSpeech(context) { status ->
             if (status != TextToSpeech.ERROR) {
-                tts?.language = Locale("tr", "TR") // Türkçe dil desteği
+                tts?.language = Locale("tr", "TR")
             }
         }
     }
@@ -48,11 +48,11 @@ fun NumberScreen() {
     )
 
     val backgroundColors = listOf(
-        Color(0xFFFFCDD2), // Açık kırmızı
-        Color(0xFFBBDEFB), // Açık mavi
-        Color(0xFFC8E6C9), // Açık yeşil
-        Color(0xFFFFF9C4), // Açık sarı
-        Color(0xFFD1C4E9)  // Açık mor
+        Color(0xFFFFCDD2),
+        Color(0xFFBBDEFB),
+        Color(0xFFC8E6C9),
+        Color(0xFFFFF9C4),
+        Color(0xFFD1C4E9)
     )
 
     val pagerState = rememberPagerState()
@@ -77,7 +77,6 @@ fun NumberScreen() {
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    // 📝 Büyük ve Renkli Sayı (Titreşim + Ses)
                     Text(
                         text = number,
                         fontSize = 80.sp,
@@ -91,14 +90,13 @@ fun NumberScreen() {
                             }
                     )
 
-                    // 📸 Sayıyı Temsil Eden Görsel (Meyve, nesne vb.)
                     Card(
                         shape = RoundedCornerShape(16.dp),
                         elevation = CardDefaults.cardElevation(8.dp),
                         modifier = Modifier
                             .size(250.dp)
                             .clickable {
-                                haptic.performHapticFeedback(HapticFeedbackType.LongPress) // 🔥 Titreşim
+                                haptic.performHapticFeedback(HapticFeedbackType.LongPress)
                                 tts?.speak(text, TextToSpeech.QUEUE_FLUSH, null, null)
                             }
                     ) {
@@ -113,6 +111,5 @@ fun NumberScreen() {
         }
     }
 }
-
 
 

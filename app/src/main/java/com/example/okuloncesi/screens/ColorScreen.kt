@@ -39,13 +39,12 @@ fun ColorScreen() {
         }
     }
 
-    // 🎨 Renkler Listesi (İsim, Arka Plan Rengi, Görsel)
     val colors = listOf(
-        Triple("Kırmızı", Color(0xFFFF0000), R.drawable.apple),
-        Triple("Mavi", Color(0xFF0000FF), R.drawable.duck),
-        //Triple("Yeşil", Color(0xFF00FF00), R.drawable.green_object),
-        //Triple("Sarı", Color(0xFFFFFF00), R.drawable.yellow_object),
-        //Triple("Turuncu", Color(0xFFFFA500), R.drawable.orange_object)
+        Triple("Kırmızı ", Color(0xFFFF0000), R.drawable.apple),
+        Triple("Mavi ", Color(0xFF0000FF), R.drawable.blue),
+        Triple("Yeşil ", Color(0xFF00FF00), R.drawable.aple),
+        Triple("Sarı ", Color(0xFFFFFF00), R.drawable.yaprak),
+        Triple("Turuncu ", Color(0xFFFFA500), R.drawable.orange)
     )
 
     val pagerState = rememberPagerState { colors.size }
@@ -66,7 +65,6 @@ fun ColorScreen() {
             contentAlignment = Alignment.Center
         ) {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                // 🔵 Renk İsmi
                 Text(
                     text = colorName,
                     fontSize = 48.sp,
@@ -80,8 +78,6 @@ fun ColorScreen() {
                             isClicked = false
                         }
                 )
-
-                // 🎨 Rengi Temsil Eden Görsel
                 Card(
                     shape = RoundedCornerShape(16.dp),
                     elevation = CardDefaults.cardElevation(8.dp),
