@@ -1,104 +1,200 @@
 package com.example.okuloncesi.screens
 
+import android.content.Context
+import android.media.MediaPlayer
 import android.speech.tts.TextToSpeech
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.gestures.detectHorizontalDragGestures
+import android.speech.tts.UtteranceProgressListener
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.airbnb.lottie.compose.*
 import com.example.okuloncesi.R
 import java.util.*
-import androidx.compose.foundation.clickable
 
+data class AnimalModel(
+    val name: String,
+    val description: String,
+    val animationRes: Int,
+    val soundRes: Int,
+    val backgroundColor: Color
+)
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun AnimalScreen() {
     val context = LocalContext.current
 
-    // 🔊 TextToSpeech Ayarları
-    var tts: TextToSpeech? by remember {
-        mutableStateOf(null)
+    // MediaPlayer state
+    val mediaPlayer = remember { mutableStateOf<MediaPlayer?>(null) }
+
+    fun playAnimalSound(context: Context, soundRes: Int) {
+        mediaPlayer.value?.release()
+        mediaPlayer.value = MediaPlayer.create(context, soundRes)
+        mediaPlayer.value?.start()
     }
 
+    val animals = listOf(
+        AnimalModel("At", "Bu gördüğün hayvan attır. Atlar çok hızlı hayvanlardır Atların sesi böyledir", R.raw.horse_animation, R.raw.horse_sound,  Color(
+            0xFF6628C9
+        )
+        ),
+        AnimalModel("Kedi", "Bu gördüğün hayvan kedidir. Kediler tatlı hayvanlardır Kedilerin sesi böyledir.", R.raw.cat_animation, R.raw.cat_sound, Color(
+            0xFF6029AD
+        )
+        ),
+        AnimalModel("Kuş", "Bu gördüğün hayvan kuştur. Kuşlar havada uçarlar ve öterler Kuşların sesi böyledir.", R.raw.bird_animation, R.raw.bird_sound, Color(
+            0xFF5B14C4
+        )
+        ),
+        AnimalModel("Köpek", "Bu gördüğün hayvan köpektir. Köpekler havlarlar Köpeklerin sesi böyledir.", R.raw.dog_animation, R.raw.dog_voice, Color(
+            0xFF6120C4
+        )
+        ),
+        AnimalModel("Aslan", "Bu gördüğün hayvan aslandır. Aslanlar ormanın kralıdır Aslanların sesi böyledir.", R.raw.lion_animation, R.raw.lion_sound, Color(
+            0xFF5922AD
+        )
+        ),
+        AnimalModel("Fil", "Bu gördüğün hayvan fildir. Filler çok su içerler. fillerin sesi böyledir", R.raw.elephant_animation, R.raw.elephant_sound, Color(
+            0xFF733DB4
+        )
+        ),
+        AnimalModel("Kurt", "Bu gördüğün hayvan kurttur. Kurtlar Türklerin simgesidir. Kurtların sesi böyledir", R.raw.wolf_animation, R.raw.wolf_sound, Color(
+            0xFF6B29C7
+        )
+        ),
+        AnimalModel("İnek", "Bu görüdüğün hayvan inektir. İnekler süt verirler ve bizde içeriz. İneklerin sesi böyledir", R.raw.cow_animation, R.raw.cow_sound, Color(
+            0xFF6426C0
+        )
+        ),
+        AnimalModel("Maymun", "Bu gördüğün hayvan maymundur. Maymunlar ağaçlarda yaşar. Maymunların sesi böyledir", R.raw.monkey_animation, R.raw.monkey_sound, Color(
+            0xFF6021B9
+        )
+        ),
+        AnimalModel("Tilki", "Bu gördüğün hayvan tilkidir. Tilkilerin sesi böyledir.", R.raw.fox_animation, R.raw.fox_sound, Color(
+            0xFF5C1EC2
+        )
+        )
+    )
+
+
+
+    val pagerState = rememberPagerState { animals.size }
+
+    var tts by remember { mutableStateOf<TextToSpeech?>(null) }
+
+    val currentPage = pagerState.currentPage
+    val animal = animals.getOrNull(currentPage)
+
+    // TTS başlat
     LaunchedEffect(Unit) {
         tts = TextToSpeech(context) { status ->
-            if (status != TextToSpeech.ERROR) {
-                tts?.language = Locale("tr", "TR") // Türkçe dil desteği
+            if (status == TextToSpeech.SUCCESS) {
+                tts?.language = Locale("tr", "TR")
             }
         }
     }
+    LaunchedEffect(pagerState.currentPage) {
+        tts?.stop()
+        mediaPlayer.value?.stop()
+        mediaPlayer.value?.release()
+        mediaPlayer.value = null
+    }
 
-    // 🐾 Hayvan Listesi
-    val animals = listOf(
-        Triple("Köpek", R.raw.dog, "Bu hayvanın ismi köpektir."),
-        Triple("Kedi", R.raw.cat, "Kediler sevimli ve oyuncudur."),
-        Triple("Kuş", R.raw.bird, "Kuşlar uçabilen canlılardır.")
-    )
+    // 🧹 Ekran kapanınca: Temizle
+    DisposableEffect(Unit) {
+        onDispose {
+            tts?.stop()
+            tts?.shutdown()
+            mediaPlayer.value?.release()
+            mediaPlayer.value = null
+        }
+    }
 
-    var currentIndex by remember { mutableStateOf(0) }
-    val (animalName, lottieAnimation, description) = animals[currentIndex]
-
-    // 🎥 Lottie Animasyonu
-    val lottieComposition by rememberLottieComposition(LottieCompositionSpec.RawRes(lottieAnimation))
-    val lottieProgress by animateLottieCompositionAsState(
-        composition = lottieComposition,
-        iterations = LottieConstants.IterateForever
-    )
-
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
-            .pointerInput(Unit) { // 🟢 Ekranı sağa-sola kaydırarak hayvan değiştir
-                detectHorizontalDragGestures { change, dragAmount ->
-                    if (dragAmount > 0 && currentIndex > 0) { // ⏪ Sola kaydırınca önceki hayvan
-                        currentIndex--
-                    } else if (dragAmount < 0 && currentIndex < animals.size - 1) { // ⏩ Sağa kaydırınca sonraki hayvan
-                        currentIndex++
-                    }
+    // TTS listener her değişiklikte ayarlanır
+    LaunchedEffect(animal) {
+        val utteranceId = UUID.randomUUID().toString()
+        tts?.setOnUtteranceProgressListener(object : UtteranceProgressListener() {
+            override fun onDone(utteranceId: String?) {
+                animal?.let {
+                    playAnimalSound(context, it.soundRes)
                 }
-            },
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        // 🐶 Hayvan İsmi
-        Text(
-            text = animalName,
-            fontSize = 30.sp,
-            modifier = Modifier.padding(bottom = 16.dp)
+            }
+
+            override fun onError(utteranceId: String?) {}
+            override fun onStart(utteranceId: String?) {}
+        })
+    }
+
+    HorizontalPager(state = pagerState) { page ->
+        val item = animals[page]
+        var isClicked by remember { mutableStateOf(false) }
+        val scale by animateFloatAsState(
+            targetValue = if (isClicked) 1.1f else 1f,
+            animationSpec = tween(durationMillis = 150),
+            label = "scaleAnimation"
         )
 
-        // 🎥 Lottie Animasyonu (Hayvana tıklayınca sesi oynat)
-        LottieAnimation(
-            composition = lottieComposition,
-            progress = { lottieProgress },
+        val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(item.animationRes))
+        val progress by animateLottieCompositionAsState(
+            composition,
+            iterations = LottieConstants.IterateForever
+        )
+
+        Box(
             modifier = Modifier
-                .size(300.dp)
-                .padding(16.dp)
-                .clickable {
-                    tts?.speak(description, TextToSpeech.QUEUE_FLUSH, null, null)
-                }
-        )
-
-        // 🔊 Hoparlör Butonu (Ses çalmak için)
-        IconButton(
-            onClick = { tts?.speak(description, TextToSpeech.QUEUE_FLUSH, null, null) },
-            modifier = Modifier.size(80.dp)
+                .fillMaxSize()
+                .background(item.backgroundColor)
+                .padding(16.dp),
+            contentAlignment = Alignment.Center
         ) {
-            Icon(
-                painter = painterResource(id = R.drawable.ic_speaker), // 📢 Hoparlör ikonu ekle (res/drawable içine koymalısın)
-                contentDescription = "Dinle",
-                modifier = Modifier.size(80.dp)
-            )
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                Text(
+                    text = item.name,
+                    fontSize = 40.sp,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier
+                        .padding(bottom = 16.dp)
+                        .clickable {
+                            isClicked = true
+                            val utteranceId = UUID.randomUUID().toString()
+                            tts?.speak(item.description, TextToSpeech.QUEUE_FLUSH, null, utteranceId)
+                            isClicked = false
+                        }
+                )
+                Card(
+                    shape = RoundedCornerShape(16.dp),
+                    elevation = CardDefaults.cardElevation(8.dp),
+                    modifier = Modifier
+                        .size(300.dp)
+                        .clickable {
+                            isClicked = true
+                            val utteranceId = UUID.randomUUID().toString()
+                            tts?.speak(item.description, TextToSpeech.QUEUE_FLUSH, null, utteranceId)
+                            isClicked = false
+                        }
+                ) {
+                    LottieAnimation(
+                        composition = composition,
+                        progress = { progress },
+                        modifier = Modifier.fillMaxSize()
+                    )
+                }
+            }
         }
     }
 }

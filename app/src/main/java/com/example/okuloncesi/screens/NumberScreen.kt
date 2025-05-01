@@ -85,7 +85,7 @@ fun NumberScreen() {
                         modifier = Modifier
                             .padding(bottom = 16.dp)
                             .clickable {
-                                haptic.performHapticFeedback(HapticFeedbackType.LongPress) // 🔥 Titreşim
+                                haptic.performHapticFeedback(HapticFeedbackType.LongPress) //Titreşim
                                 tts?.speak(text, TextToSpeech.QUEUE_FLUSH, null, null)
                             }
                     )
