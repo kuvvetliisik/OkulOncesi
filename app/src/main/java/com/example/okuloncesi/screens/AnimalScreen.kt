@@ -91,8 +91,6 @@ fun AnimalScreen() {
         )
     )
 
-
-
     val pagerState = rememberPagerState { animals.size }
 
     var tts by remember { mutableStateOf<TextToSpeech?>(null) }
