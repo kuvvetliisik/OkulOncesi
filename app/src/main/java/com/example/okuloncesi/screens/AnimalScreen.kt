@@ -50,43 +50,43 @@ fun AnimalScreen() {
 
     val animals = listOf(
         AnimalModel("At", "Bu gördüğün hayvan attır. Atlar çok hızlı hayvanlardır Atların sesi böyledir", R.raw.horse_animation, R.raw.horse_sound,  Color(
-            0xFF6628C9
+            0xFFC8E6C9
         )
         ),
         AnimalModel("Kedi", "Bu gördüğün hayvan kedidir. Kediler tatlı hayvanlardır Kedilerin sesi böyledir.", R.raw.cat_animation, R.raw.cat_sound, Color(
-            0xFF6029AD
+            0xFFC8E6C9
         )
         ),
         AnimalModel("Kuş", "Bu gördüğün hayvan kuştur. Kuşlar havada uçarlar ve öterler Kuşların sesi böyledir.", R.raw.bird_animation, R.raw.bird_sound, Color(
-            0xFF5B14C4
+            0xFFC8E6C9
         )
         ),
         AnimalModel("Köpek", "Bu gördüğün hayvan köpektir. Köpekler havlarlar Köpeklerin sesi böyledir.", R.raw.dog_animation, R.raw.dog_voice, Color(
-            0xFF6120C4
+            0xFFC8E6C9
         )
         ),
         AnimalModel("Aslan", "Bu gördüğün hayvan aslandır. Aslanlar ormanın kralıdır Aslanların sesi böyledir.", R.raw.lion_animation, R.raw.lion_sound, Color(
-            0xFF5922AD
+            0xFFC8E6C9
         )
         ),
         AnimalModel("Fil", "Bu gördüğün hayvan fildir. Filler çok su içerler. fillerin sesi böyledir", R.raw.elephant_animation, R.raw.elephant_sound, Color(
-            0xFF733DB4
+            0xFFC8E6C9
         )
         ),
         AnimalModel("Kurt", "Bu gördüğün hayvan kurttur. Kurtlar Türklerin simgesidir. Kurtların sesi böyledir", R.raw.wolf_animation, R.raw.wolf_sound, Color(
-            0xFF6B29C7
+            0xFFC8E6C9
         )
         ),
         AnimalModel("İnek", "Bu görüdüğün hayvan inektir. İnekler süt verirler ve bizde içeriz. İneklerin sesi böyledir", R.raw.cow_animation, R.raw.cow_sound, Color(
-            0xFF6426C0
+            0xFFC8E6C9
         )
         ),
         AnimalModel("Maymun", "Bu gördüğün hayvan maymundur. Maymunlar ağaçlarda yaşar. Maymunların sesi böyledir", R.raw.monkey_animation, R.raw.monkey_sound, Color(
-            0xFF6021B9
+            0xFFC8E6C9
         )
         ),
         AnimalModel("Tilki", "Bu gördüğün hayvan tilkidir. Tilkilerin sesi böyledir.", R.raw.fox_animation, R.raw.fox_sound, Color(
-            0xFF5C1EC2
+            0xFFC8E6C9
         )
         )
     )
