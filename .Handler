@@ -1,0 +1,64 @@
+[33mcommit 621115026a62d48739085f1c228a72500ce6c250[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: kuvvetliisik <162022064+kuvvetliisik@users.noreply.github.com>
+Date:   Sun May 4 08:20:54 2025 +0300
+
+    Öğreti ekranındaki kategoriler tamamlandı.
+
+[33mcommit d7b36d674eacabc29cfcac83ca099e79b7f8cbc5[m
+Author: kuvvetliisik <162022064+kuvvetliisik@users.noreply.github.com>
+Date:   Fri May 2 17:54:16 2025 +0300
+
+    Kıyafetler, Araçlar kategorisi oluşturuldu ve görsel, animasyonlar eklendi.
+
+[33mcommit 1e302364870d0abd0450252fe1963a9946adcbe6[m
+Author: kuvvetliisik <162022064+kuvvetliisik@users.noreply.github.com>
+Date:   Thu May 1 23:13:07 2025 +0300
+
+     Hayvanlar kategorisine animasyonlar ve hayvan sesleri eklendi.
+
+[33mcommit ea16c7aa857909731481398e4a4427f882102699[m
+Author: kuvvetliisik <162022064+kuvvetliisik@users.noreply.github.com>
+Date:   Mon Mar 24 14:22:31 2025 +0300
+
+    Projenin kategori alanları özelleştirildi.
+
+[33mcommit 968bda65b65ea6cd3309ef8d347db697673d323e[m
+Author: kuvvetliisik <162022064+kuvvetliisik@users.noreply.github.com>
+Date:   Wed Mar 5 15:04:58 2025 +0300
+
+    Renkler ekranı geliştirildi 🎨✨
+    - Yeni Pager API ile sayfa kaydırma eklendi
+    - Renk adları tıklandığında seslendirme yapıyor (TTS) 🔊
+    - Arka plan renkleri değişiyor 🌈
+    - Hafif büyüme animasyonu eklendi 🎭
+    - Daha etkileşimli hale getirildi 🚀
+
+[33mcommit e0dcc3909ce8a854092c46bcd51fc1f6d9d4b390[m
+Author: kuvvetliisik <162022064+kuvvetliisik@users.noreply.github.com>
+Date:   Tue Mar 4 11:43:11 2025 +0300
+
+    Sayılar Ekranı Güncellendi, eklemeler yapıldı ancak istenilen seviyede değil daha da geliştirilecektir.
+
+[33mcommit f408a52afee1a48af62732a573472b8b7a2e236c[m
+Author: kuvvetliisik <162022064+kuvvetliisik@users.noreply.github.com>
+Date:   Mon Mar 3 16:34:59 2025 +0300
+
+    Eksik ses dosyaları eklendi.
+
+[33mcommit 549863eb53193e661b8e7041ff7f0c0576f96cd5[m
+Author: kuvvetliisik <162022064+kuvvetliisik@users.noreply.github.com>
+Date:   Mon Mar 3 16:30:33 2025 +0300
+
+     Kullanıcı deneyimi iyileştirildi: Sesli geri bildirim ve animasyonlar eklendi
+
+[33mcommit 000c21966be383ab7c80d962f7515edf8c4c6b31[m
+Author: kuvvetliisik <162022064+kuvvetliisik@users.noreply.github.com>
+Date:   Mon Mar 3 14:31:54 2025 +0300
+
+    Proje güncellendi ve navigasyon hataları giderildi.
+
+[33mcommit 397cd2e13b13a60f24bc3670ecec3dd490acc00a[m
+Author: kuvvetliisik <162022064+kuvvetliisik@users.noreply.github.com>
+Date:   Sun Mar 2 18:04:23 2025 +0300
+
+    Projenin temel yapı taşları oluşturuldu.

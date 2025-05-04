@@ -1,5 +1,7 @@
 package com.example.okuloncesi.screens
 
+import CategoryCardWithSteps
+
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -19,66 +21,43 @@ import com.example.okuloncesi.data.categoryList
 import com.example.okuloncesi.data.Category
 import androidx.compose.ui.res.painterResource
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CardDefaults
+import com.example.okuloncesi.utils.ProgressManager
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.platform.LocalContext
+
+
 
 @Composable
-fun CategoryScreen(navController: NavController) { // category parametresini kaldır
-    Column(
+fun CategoryScreen(navController: NavController) {
+    LazyColumn(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp),
-        verticalArrangement = Arrangement.Center,
+        verticalArrangement = Arrangement.spacedBy(12.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(
-            text = "Kategorini Seç",
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(bottom = 16.dp)
-        )
-
-        categoryList.forEach { category ->
-            CategoryCard(category = category, navController = navController)
-        }
-    }
-}
-@Composable
-fun CategoryCard(category: Category, navController: NavController) {
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(8.dp)
-            .clickable {
-                when (category.name) {
-                    "Hayvanlar" -> navController.navigate("animalScreen")
-                    "Sayılar" -> navController.navigate("numberScreen")
-                    "Renkler" -> navController.navigate("colorScreen")
-                    "Şekiller" -> navController.navigate("shapeScreen")
-                    "Meyveler" -> navController.navigate("fruitScreen")
-                    "Araçlar" -> navController.navigate("vehicleScreen")
-                    "Kıyafetler" -> navController.navigate("clothesScreen")
-                }
-            },
-        shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = category.backgroundColor)
-    ) {
-        Row(
-            modifier = Modifier.padding(16.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Image(
-                painter = painterResource(id = category.imageRes),
-                contentDescription = category.name,
-                modifier = Modifier
-                    .size(64.dp)
-                    .padding(end = 16.dp)
-            )
+        item {
             Text(
-                text = category.name,
-                fontSize = 20.sp,
+                text = "Kategorini Seç",
+                fontSize = 24.sp,
                 fontWeight = FontWeight.Bold,
-                color = Color.Black
+                modifier = Modifier.padding(bottom = 16.dp)
             )
+        }
+
+        items(categoryList) { category ->
+            CategoryCardWithSteps(category = category, navController = navController)
         }
     }
 }
+
+
+
+
+
+

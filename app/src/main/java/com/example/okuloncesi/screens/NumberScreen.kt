@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.airbnb.lottie.compose.*
 import com.example.okuloncesi.R
+import com.example.okuloncesi.utils.ProgressManager
 import kotlinx.coroutines.delay
 import java.util.*
 
@@ -41,6 +42,8 @@ data class NumberModel(
 @Composable
 fun NumberScreen() {
     val context = LocalContext.current
+
+
     var tts by remember { mutableStateOf<TextToSpeech?>(null) }
 
     val numberText = listOf("Biiir", "İkii", "Üç", "Döört", "Beşş", "Alttı", "Yedii", "Sekizz", "Dokuzz", "Oon")

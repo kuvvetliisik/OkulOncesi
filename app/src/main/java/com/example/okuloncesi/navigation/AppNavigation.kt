@@ -1,5 +1,7 @@
 package com.example.okuloncesi.navigation
 
+
+import NumberTestScreen
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.compose.NavHost
@@ -20,5 +22,10 @@ fun AppNavigation() {
         composable("fruitScreen") { FruitScreen() }
         composable("vehicleScreen") { VehicleScreen() }
         composable("clothesScreen") { ClothesScreen() }
-    }
+        composable("numberTestScreen") { NumberTestScreen(navController) }
+
+
+        }
+
+
 }
